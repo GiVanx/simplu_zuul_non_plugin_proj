@@ -1,6 +1,0 @@
-- hosts: all
-  tasks:
-    - name: Build project
-      shell: |
-         cd src/gerrit/test1/ 
-         mvn test
