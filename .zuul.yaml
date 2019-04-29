@@ -1,0 +1,25 @@
+- job:
+    name: project_build
+    parent: base
+    run: playbooks/buildproject.yaml
+
+- job:
+    name: install_maven
+    parent: base
+    run: playbooks/installmaven.yaml
+
+- job:
+    name: run_project
+    parent: base
+    run:
+      - playbooks/installmaven.yaml
+      - playbooks/runproject.yaml
+
+- project:
+    check: 
+      jobs: 
+        - install_maven
+        - project_build
+    gate:
+      jobs:
+        - run_project
